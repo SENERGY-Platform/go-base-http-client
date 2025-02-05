@@ -42,7 +42,7 @@ func New(httpClient HTTPClient, cErrorFunc func(code int, err error) error, head
 }
 
 func (c *Client) ExecRequestJSON(req *http.Request, v any) error {
-	body, err := c.execRequest(req)
+	body, err := c.ExecRequest(req)
 	if err != nil {
 		return err
 	}
@@ -55,7 +55,7 @@ func (c *Client) ExecRequestJSON(req *http.Request, v any) error {
 }
 
 func (c *Client) ExecRequestString(req *http.Request) (string, error) {
-	body, err := c.execRequest(req)
+	body, err := c.ExecRequest(req)
 	if err != nil {
 		return "", err
 	}
@@ -64,7 +64,7 @@ func (c *Client) ExecRequestString(req *http.Request) (string, error) {
 }
 
 func (c *Client) ExecRequestVoid(req *http.Request) error {
-	body, err := c.execRequest(req)
+	body, err := c.ExecRequest(req)
 	if err != nil {
 		return err
 	}
@@ -73,7 +73,7 @@ func (c *Client) ExecRequestVoid(req *http.Request) error {
 	return nil
 }
 
-func (c *Client) execRequest(req *http.Request) (io.ReadCloser, error) {
+func (c *Client) ExecRequest(req *http.Request) (io.ReadCloser, error) {
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
 		return nil, err
